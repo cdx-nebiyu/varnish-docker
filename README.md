@@ -1,4 +1,4 @@
-Automated build of Varnish and Nginx with Docker for basic testing of Varnish Purge
+Automated build of Varnish and Nginx with Docker for basic testing of Varnish PURGE
 ===========
 
 ### Varnish environment variables
@@ -12,19 +12,19 @@ Varnish will be configured by default to cache requests for nginx running on loc
 If you prefer you can easily build the docker image by yourself. After this the image is ready for use on your machine and can be used for multiple starts.
 
 	$ cd varnish-docker
-	$ sudo docker build -t cdxtest/varnish .
+	$ sudo docker build -t desired_repo/varnish .
 
 
 ### Start the container
 The container has all pre requisites set up to run any varnish application. Specify all needed environment variables.
 
-	$ sudo docker run -i -d -p 80 -e NGINX_PORT=8082 cdxtest/varnish
+	$ sudo docker run -i -d -p 80 -e NGINX_PORT=8082 desired_repo/varnish
 
 
 #### Start the container and keep control
 The command above starts the container in deamon mode (-d) and runs in the background. If you want to start it by yourself just to see what happens use this command:
 
-	$ sudo docker run -i -t -p 80 -e NGINX_PORT=8082 cdxtest/varnish bash
+	$ sudo docker run -i -t -p 80 -e NGINX_PORT=8082 desired_repo/varnish bash
 
 Notice the two changes made here, first we replaced the deamon switch (-d) with the tty switch (-t) which pipes the std in and std out to your terminal.
 
