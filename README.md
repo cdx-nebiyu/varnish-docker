@@ -6,7 +6,7 @@ Varnish will be configured by default to cache requests for nginx running on loc
 
         NGINX_PORT 8082 
         VARNISH_BACKEND_IP 127.0.0.1
-	VARNISH_PORT 80
+        VARNISH_PORT 80
 
 ### Build the docker image by yourself
 If you prefer you can easily build the docker image by yourself. After this the image is ready for use on your machine and can be used for multiple starts.
