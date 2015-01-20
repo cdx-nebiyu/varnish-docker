@@ -1,36 +1,30 @@
-Automated build of Varnish with Docker
+Automated build of Varnish and Nginx with Docker for basic testing of Varnish Purge
 ===========
 
 ### Varnish environment variables
-Varnish will make of the following environment variables.
+Varnish will be configured by default to cache requests for nginx running on localhost by using the following environment variables.
 
-	VARNISH_BACKEND_PORT 80
-	VARNISH_BACKEND_IP 172.17.42.1
+        NGINX_PORT 8082 
+        VARNISH_BACKEND_IP 127.0.0.1
 	VARNISH_PORT 80
-
-### Use the pre built image
-The pre built image can be downloaded using docker directly. After that you do not need to use this command again, you will have the image on your machine.
-
-	$ sudo docker pull jacksoncage/varnish
-
 
 ### Build the docker image by yourself
 If you prefer you can easily build the docker image by yourself. After this the image is ready for use on your machine and can be used for multiple starts.
 
 	$ cd varnish-docker
-	$ sudo docker build -t jacksoncage/varnish .
+	$ sudo docker build -t cdxtest/varnish .
 
 
 ### Start the container
 The container has all pre requisites set up to run any varnish application. Specify all needed environment variables.
 
-	$ sudo docker run -i -d -p 80 -e VARNISH_BACKEND_PORT=8080 jacksoncage/varnish
+	$ sudo docker run -i -d -p 80 -e NGINX_PORT=8082 cdxtest/varnish
 
 
 #### Start the container and keep control
 The command above starts the container in deamon mode (-d) and runs in the background. If you want to start it by yourself just to see what happens use this command:
 
-	$ sudo docker run -i -t -p 80 -e VARNISH_BACKEND_PORT=8080 jacksoncage/varnish bash
+	$ sudo docker run -i -t -p 80 -e NGINX_PORT=8082 cdxtest/varnish bash
 
 Notice the two changes made here, first we replaced the deamon switch (-d) with the tty switch (-t) which pipes the std in and std out to your terminal.
 

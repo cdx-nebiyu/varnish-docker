@@ -5,9 +5,32 @@
 # server.
 #
 backend default {
-    .host = "${VARNISH_BACKEND_IP}";
-    .port = "${VARNISH_BACKEND_PORT}";
+    #.host = "127.0.01:8082";
+    .host = "${VARNISH_BACKEND_IP}:${NGINX_PORT}";
+    #.port = "${VARNISH_BACKEND_PORT}";
 }
+
+sub vcl_recv {
+        if(req.request == "PURGE") {
+                return (lookup);
+        }
+}
+
+sub vcl_hit {
+        if(req.request == "PURGE") {
+                purge;
+                error 200 "Purged.";
+        }
+}
+
+sub vcl_miss {
+        if(req.request == "PURGE") {
+                purge;
+                error 200 "Purged.";
+        }
+}
+
+
 #
 # Below is a commented-out copy of the default VCL logic.  If you
 # redefine any of these subroutines, the built-in logic will be
