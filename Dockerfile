@@ -1,4 +1,4 @@
-FROM        ubuntu:14.04.1
+FROM        ubuntu:14.04.2
 MAINTAINER  Nebiyu "nebiyu@cedexis.com"
 ENV REFRESHED_AT 2014-10-18
 
@@ -31,6 +31,9 @@ ADD gurumeditation.txt /usr/share/nginx/html/files/test/dir/gurumeditation.txt
 
 # Expose port 80
 EXPOSE 80
+
+# Expose volumes to be able to use data containers
+VOLUMES ["/var/lib/varnish", "/etc/varnish"]
 
 ADD start.sh /start.sh
 CMD ["/start.sh"]
