@@ -8,6 +8,12 @@ do
     sed -i "s|\${${name}}|${value}|g" /etc/varnish/default.vcl
 done
 
+for name in NGINX_PORT2 VARNISH_BACKEND_IP
+do
+    eval value=\$$name
+    sed -i "s|\${${name}}|${value}|g" /etc/varnish/default.vcl
+done
+
 service nginx stop
 service nginx start
 

@@ -10,7 +10,17 @@ backend default {
     #.port = "${VARNISH_BACKEND_PORT}";
 }
 
+backend otherbackend {
+    .host = "${VARNISH_BACKEND_IP}:${NGINX_PORT2}";
+}
+
 sub vcl_recv {
+	if (req.http.host ~ "foo.com" || req.http.host ~ "example.com") {
+		set req.backend = otherbackend;
+	} else { 
+		set req.backend = default;
+	}
+
         if(req.request == "PURGE") {
                 return (lookup);
         }

@@ -16,16 +16,22 @@ CMD ["service nginx stop"]
 ADD default.vcl /etc/varnish/default.vcl
 
 ENV NGINX_PORT 8082
+ENV NGINX_PORT2 8083
 ENV VARNISH_BACKEND_IP 127.0.0.1
 ENV VARNISH_PORT 80
 
 # Set up nginx to run on desired port and lay down test files to be served by nginx and cached by varnish
 ADD default /etc/nginx/sites-available/default
 CMD ["mkdir /usr/share/nginx/html/files"]
+CMD ["mkdir /usr/share/nginx/html2/files"]
 CMD ["mkdir /usr/share/nginx/html/files/test"]
+CMD ["mkdir /usr/share/nginx/html2/files/test"]
 CMD ["mkdir /usr/share/nginx/html/files/test/dir"]
+CMD ["mkdir /usr/share/nginx/html2/files/test/dir"]
 ADD varnish.html /usr/share/nginx/html/varnish.html
+ADD varnish.html /usr/share/nginx/html2/varnish.html
 ADD gurumeditation.txt /usr/share/nginx/html/files/test/dir/gurumeditation.txt
+ADD gurumeditation.txt /usr/share/nginx/html2/files/test/dir/gurumeditation.txt
 
 # start varnish
 
